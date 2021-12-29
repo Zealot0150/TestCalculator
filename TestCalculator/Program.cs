@@ -43,21 +43,30 @@ namespace TestCalculator
          static double Addition(double [] doubleArray)
         {
             double result = 0;
-            for (int i = 0; i < doubleArray.Length; i+=2)
+            for (int i = 0; i < doubleArray.Length; i++)
             {
-                result = Addition(i, i + 1);
+                result += doubleArray[i];
             }
             return result;
         }
 
         public static double Subtraction(double[] doubleArray)
         {
-            double result = 0;
-            for (int i = 0; i < doubleArray.Length; i += 2)
+            if (doubleArray.Length == 0)
+                return 0;
+            double value = doubleArray[0];
+
+
+            if (doubleArray.Length == 1)
+                return value;
+
+            
+
+            for (int i = 1; i < doubleArray.Length; i++)
             {
-                result = Subtraction(i, i + 1);
+                value -= doubleArray[i];
             }
-            return result;
+            return value;
         }
 
         public static double Addition(double firstArgument, double secondArgument)
@@ -68,7 +77,7 @@ namespace TestCalculator
         public static double Division(double firstArgument, double secondArgument)
         {
             if (secondArgument == 0)
-                return 0;
+                throw new DivideByZeroException("Du kan inte dela med noll");
             else
                 return firstArgument / secondArgument;
         }
@@ -93,6 +102,8 @@ namespace TestCalculator
         {
             bool running = true;
             WriteLine("Välkommen till calculatorn version 1.0");
+
+
             double firstArgument, secondArgument, result = 0;
             string userOperator = "";
             while (running)
